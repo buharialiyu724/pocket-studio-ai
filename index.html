@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101114"><meta name="description" content="Pocket Studio AI — mobile photo filters and editing studio">
+<title>Pocket Studio AI</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./"><span class="brandmark">✦</span><span>Pocket <b>Studio</b><small>PHOTO LAB</small></span></a>
+  <div class="top-actions"><button id="openBtn" class="ghost">＋ <span>Open photo</span></button><button id="saveBtn" class="primary">Export ↗</button></div>
+</header>
+<main class="app">
+  <section class="stage-wrap">
+    <div class="stage-head"><div><span class="eyebrow">YOUR CANVAS</span><h1 id="modeTitle">Studio editor</h1></div><div class="stage-actions"><button id="compareBtn" class="iconbtn" title="Hold to compare with original">◐ <span>Compare</span></button><button id="resetBtn" class="iconbtn" title="Reset adjustments">↺ <span>Reset</span></button></div></div>
+    <div class="canvas" id="canvas">
+      <div id="emptyState" class="empty"><div class="upload-icon">↥</div><h2>Your next favorite photo</h2><p>Choose a photo to start editing. It stays in your browser.</p><button id="chooseBtn" class="primary">Choose photo</button><span class="privacy">🔒 Private by default · processed on this device</span></div>
+      <img id="photo" alt="Photo being edited" hidden><div id="canvasBadge" class="canvas-badge" hidden>ORIGINAL</div>
+    </div>
+    <div class="canvas-foot"><span id="photoMeta">No photo selected</span><span id="zoomLabel">FIT TO SCREEN</span></div>
+    <input id="fileInput" type="file" accept="image/*" hidden>
+  </section>
+  <section class="editor">
+    <div class="mode-switch" role="tablist" aria-label="Editor style"><button class="mode active" data-mode="iphone" role="tab" aria-selected="true"> iPhone style</button><button class="mode" data-mode="samsung" role="tab" aria-selected="false">◈ Galaxy style</button></div>
+    <div class="tabs" role="tablist" aria-label="Editing tools"><button class="tab active" data-tab="looks">Looks</button><button class="tab" data-tab="adjust">Adjust</button><button class="tab" data-tab="ai">AI assistant <span class="spark">✦</span></button></div>
+    <section class="panel" id="panel-looks">
+      <div class="section-heading"><div><h2>Filter library</h2><p>Tap a look to preview it live</p></div><span class="pill">12 PRESETS</span></div>
+      <div class="presets" id="presets">
+        <button class="preset active" data-filter="original"><span class="swatch sw-original">Aa</span><span>Original</span></button>
+        <button class="preset" data-filter="natural"><span class="swatch sw-natural">Aa</span><span>Natural</span></button>
+        <button class="preset" data-filter="vivid"><span class="swatch sw-vivid">Aa</span><span>Vivid</span></button>
+        <button class="preset" data-filter="warm"><span class="swatch sw-warm">Aa</span><span>Warm</span></button>
+        <button class="preset" data-filter="cool"><span class="swatch sw-cool">Aa</span><span>Cool</span></button>
+        <button class="preset" data-filter="dramatic"><span class="swatch sw-dramatic">Aa</span><span>Dramatic</span></button>
+        <button class="preset" data-filter="soft"><span class="swatch sw-soft">Aa</span><span>Soft</span></button>
+        <button class="preset" data-filter="portrait"><span class="swatch sw-portrait">Aa</span><span>Portrait</span></button>
+        <button class="preset" data-filter="mono"><span class="swatch sw-mono">Aa</span><span>Mono</span></button>
+        <button class="preset" data-filter="fade"><span class="swatch sw-fade">Aa</span><span>Fade</span></button>
+        <button class="preset" data-filter="golden"><span class="swatch sw-golden">Aa</span><span>Golden</span></button>
+        <button class="preset" data-filter="night"><span class="swatch sw-night">Aa</span><span>Night</span></button>
+      </div>
+      <div class="tip">✦ <span id="lookTip">Natural keeps skin tones balanced with gentle contrast.</span></div>
+    </section>
+    <section class="panel" id="panel-adjust" hidden>
+      <div class="section-heading"><div><h2>Fine tune</h2><p>Adjustments update the preview instantly</p></div><button class="textbtn" id="resetSliders">Reset</button></div>
+      <div id="sliders" class="sliders"></div>
+    </section>
+    <section class="panel" id="panel-ai" hidden>
+      <div class="ai-card"><div class="ai-orb">✦</div><div><h2>What should we change?</h2><p>Describe a look in plain language. Common edits work locally; a configured AI worker can interpret more flexible instructions.</p></div></div>
+      <div class="prompt-chips"><button class="chip">Give it a natural iPhone Pro look</button><button class="chip">Warm golden-hour portrait</button><button class="chip">Make it brighter but keep skin natural</button><button class="chip">Moody cinematic look</button></div>
+      <label for="promptInput" class="field-label">YOUR INSTRUCTION</label><textarea id="promptInput" rows="3" placeholder="e.g. Brighten the face, warm the colors, and keep it realistic…"></textarea>
+      <label class="field-label" for="aiEndpoint">OPTIONAL AI WORKER URL</label><input id="aiEndpoint" class="endpoint" type="url" placeholder="https://your-worker.example.workers.dev">
+      <p class="field-help">Without a worker URL, prompts are interpreted locally. To enable model-assisted instructions, deploy <code>worker.js</code> with your API key stored as a server secret. Never put API keys in this website's JavaScript.</p>
+      <button id="applyPrompt" class="primary wide">✦ Apply instruction</button><div id="aiStatus" class="status" aria-live="polite"></div>
+    </section>
+    <footer class="editor-foot"><span>◉ <span id="statusText">Ready when you are</span></span><span>POCKET STUDIO AI · BETA</span></footer>
+  </section>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="./app.js"></script>
+</body></html>
